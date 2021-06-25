@@ -1,3 +1,6 @@
+import folium
+
+
 """
 
 
@@ -33,21 +36,23 @@ relleno = False o True para relleno
 
 
 
+class GpsManager():
 
-
-class GpsManager(object):
-
+    def __init__(self):
         self.modo = "Stamen Terrain"
         self.modos_disponibles = ["Stamen Terrain"]
 
 
+    def info(self):
+        #print(open("ayuda.txt").read())
+        print("documentacion en proceso")
 
     def graficar_pares(self, vector_pares_latitud_longitud , ruta_salida ):
         # este método debe recibir una lista de pares coordenadas de la siguiente manera
         # [ [latitud1,longitud]  [latitud,longitud] [n latitud , n longitud ] ... ... ]
         # la lista será procesada y se generará como salida un Archivo de tipo html
         # que contendrá las latitudes y longitudes en un mapa
-
+        print("[Procesando]")
         iterator = 0
         try:
             for pares_ordenados in vector_pares_latitud_longitud:
@@ -55,15 +60,15 @@ class GpsManager(object):
                 longitud = pares_ordenados[1]
                 if iterator==0:
                     map=folium.Map(
-                    location=[float(longitud),float(latitud)],
-                    tiles= MODO, # modo por defecto
+                    location=[float(latitud),float(longitud)],
+                    tiles= self.modo, # modo por defecto
                     zoom_start=10 )
                     iterator=iterator+1
                 else:
-                    print("añadiendo punto ",clear_latitud,clear_longitud)
+                    print("añadiendo punto ",latitud,longitud)
                     folium.Circle(
-                        radius=2,
-                        location=[float(clear_latitud),float(clear_longitud)],
+                        radius=3,
+                        location=[float(latitud),float(longitud)],
                         popup=str(iterator),
                         color="red",
                         fill=True,
@@ -73,9 +78,6 @@ class GpsManager(object):
             # se guarda el mapa con el nombre solicitado por el usuario
             map.save(ruta_salida)
 
-
-
-
         # -----------------------------------------------------------------------------
         #   exepción del error generado en try :
         #            se muestra informacion de un posible error en el manejo
@@ -83,26 +85,25 @@ class GpsManager(object):
 
 
         except Exception as e:
-            mensaje """
-                        +-------------------------------------------------------------------------+
-                        [INFORMACION DE USO]
+            mensaje = """
++-------------------------------------------------------------------------+
+[INFORMACION DE USO]
 
-                        Ocurrió un error mientras se graficaban los pares ordenados
-                        Verifique que el valor enviado tenga la siguiente estructura :
+    Ocurrió un error mientras se graficaban los pares ordenados
+    Verifique que el valor enviado tenga la siguiente estructura :
 
-                        <list> o <tuple>
-                                 [[latitud1,longitud],[latitud,longitud],[latitud,longitud ]]
+    <list> o <tuple>
+        [[latitud1,longitud],[latitud,longitud],[latitud,longitud ]]
 
-                        ejemplo:
-                                [[-5.1121212,5.322323] , [-5.1212131,5.3121212] .. etc ]
+    ejemplo:
+        [[-5.1121212,5.322323] , [-5.1212131,5.3121212] .. etc ]
 
-                                NOTA:
-                                los valores de latitud y longitud pueden ser numeros flotantes
-                                o cadenas alfanuméricas que puedan convertirse a travéz de
-                                float()
+        NOTA:
+        los valores de latitud y longitud pueden ser numeros flotantes
+        o cadenas alfanuméricas que puedan convertirse a travéz de
+        float()
 
-                        +-------------------------------------------------------------------------+
-                        Adicionalmente se presenta más INFORMACION del error
-                        """
++-------------------------------------------------------------------------+
+Adicionalmente se presenta más INFORMACION del error """
             print(mensaje)
             print(e)

@@ -1,0 +1,9 @@
+######################### MODULOS DE AYUDA ###############################
+
+graficar_pares   (self, vector_pares_latitud_longitud , ruta_salida ):
+
+    permite graficar pares ordenados en un mapa
+    argumentos :
+    vector_pares_latitud_longitud = [[latitud1,longitud] ,[latitud,longitud]]
+    ruta_salida = string con el ruta/nombre y formato de salida
+    

@@ -1,0 +1,10 @@
+LICENCE
+README.md
+pyproject.toml
+setup.cfg
+src/gpstools/__init__.py
+src/gpstools/gps.py
+src/gpstools.egg-info/PKG-INFO
+src/gpstools.egg-info/SOURCES.txt
+src/gpstools.egg-info/dependency_links.txt
+src/gpstools.egg-info/top_level.txt
